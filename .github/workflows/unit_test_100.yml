@@ -20,10 +20,11 @@ jobs:
       - name: Run make test 100 times
         run: |
           for i in {1..100}; do
-            make test > "test_run_$i.log" 2>&1
+            make test > "test_run_$i.log" 2>&1 || true
           done
-
+  
       - name: Upload test artifacts
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: test-logs
