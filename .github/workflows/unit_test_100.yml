@@ -1,0 +1,30 @@
+name: Run unit test 100 times
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: .go_version
+      - name: Run make test 100 times
+        run: |
+          for i in {1..100}; do
+            make test > "test_run_$i.log" 2>&1
+          done
+
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-logs
+          path: test_run_*.log
