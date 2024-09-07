@@ -26,6 +26,10 @@ import (
 const True = "true"
 const False = "false"
 
+// Kubernetes
+const Label = "label"
+const Annotation = "annotation"
+
 // Cluster
 const DefaultNodeAttributeHostNameKey = "si.io/hostname"
 const DefaultNodeAttributeRackNameKey = "si.io/rackname"
@@ -97,6 +101,9 @@ const NamespaceQuota = DomainYuniKorn + "namespace.quota"
 // NamespaceGuaranteed Namespace Guaranteed
 const NamespaceGuaranteed = DomainYuniKorn + "namespace.guaranteed"
 
+// NamespaceMaxApps Namespace Max Apps
+const NamespaceMaxApps = DomainYuniKorn + "namespace.maxApps"
+
 // AnnotationAllowPreemption set on PriorityClass, opt out of preemption for pods with this priority class
 const AnnotationAllowPreemption = DomainYuniKorn + "allow-preemption"
 
@@ -121,3 +128,9 @@ const AutoGenAppSuffix = "autogen"
 
 // Compression Algorithms for schedulerConfig
 const GzipSuffix = "gz"
+
+// The key list which are used to identify the application ID or queue name in pod.
+var AppIdLabelKeys = []string{CanonicalLabelApplicationID, SparkLabelAppID, LabelApplicationID}
+var AppIdAnnotationKeys = []string{AnnotationApplicationID}
+var QueueLabelKeys = []string{CanonicalLabelQueueName, LabelQueueName}
+var QueueAnnotationKeys = []string{AnnotationQueueName}
